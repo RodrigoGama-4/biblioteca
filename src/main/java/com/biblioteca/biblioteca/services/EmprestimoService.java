@@ -23,4 +23,8 @@ public class EmprestimoService {
     public Optional<Emprestimo> findbyId(UUID id){
         return this.emprestimoRepository.findById(id);
     }
+
+    public void saveLoad(Emprestimo emprestimo){
+        this.emprestimoRepository.save(emprestimo);
+    }
 }

@@ -22,4 +22,8 @@ public class LivrosService {
     public Optional<Livros> findbyId(String isbn){
         return this.livrosRepository.findById(isbn);
     }
+
+    public void saveBook(Livros livro){
+        this.livrosRepository.save(livro);
+    }
 }

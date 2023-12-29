@@ -23,4 +23,8 @@ public class AutorService {
     public Optional<Autor> findbyId(UUID id){
         return this.autorRepository.findById(id);
     }
+
+    public void saveAuth(Autor autor){
+        this.autorRepository.save(autor);
+    }
 }

@@ -25,5 +25,8 @@ public class UsuarioService {
         return this.usuarioRepository.findById(id);
     }
 
+    public void saveUser(Usuario user){
+        this.usuarioRepository.save(user);
+    }
 
 }
