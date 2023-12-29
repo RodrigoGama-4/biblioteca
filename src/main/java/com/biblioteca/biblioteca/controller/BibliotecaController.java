@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,6 +65,12 @@ public class BibliotecaController {
         Usuario user = new Usuario(usuarioDTO);
         this.usuarioService.saveUser(user);
     }
+
+    @DeleteMapping("/usuarios/{id}")
+    public void deleteUser(@PathVariable UUID id){
+        Optional<Usuario> user = this.usuarioService.findbyId(id);
+        user.ifPresent(usuario -> this.usuarioService.deleteUser(usuario));
+    }
     
 
     /*CRUD de autores */
@@ -84,6 +91,12 @@ public class BibliotecaController {
     public void saveAuth(@RequestBody AutorDTO autorDTO){
         Autor autor = new Autor(autorDTO);
         this.autorService.saveAuth(autor);
+    }
+    
+    @DeleteMapping("/autores/{id}")
+    public void deleteAuth(@PathVariable UUID id){
+        Optional<Autor> autor = this.autorService.findbyId(id);
+        autor.ifPresent(autorDelete -> this.autorService.deleteAuth(autorDelete));
     }
 
     /*CRUD de livros */
@@ -106,6 +119,12 @@ public class BibliotecaController {
         this.livrosService.saveBook(livro);
     }
 
+    @DeleteMapping("/livros/{id}")
+    public void deleteBook(@PathVariable String isbn){
+        Optional<Livros> livro = this.livrosService.findbyId(isbn);
+        livro.ifPresent(livroDelete -> this.livrosService.deleteBook(livroDelete));
+    }
+
     /*CRUD de usuários */
     @GetMapping("/emprestimos")
     public ResponseEntity<Page<Emprestimo>> getAllLoan(Pageable pageable){
@@ -124,5 +143,11 @@ public class BibliotecaController {
     public void saveLoad(@RequestBody EmprestimoDTO emprestimoDTO){
         Emprestimo emprestimo = new Emprestimo(emprestimoDTO);
         this.emprestimoService.saveLoad(emprestimo);
+    }
+
+    @DeleteMapping("/emprestimos/{id}")
+    public void deleteLoad(@PathVariable UUID id){
+        Optional<Emprestimo> emprestimo = this.emprestimoService.findbyId(id);
+        emprestimo.ifPresent(emprestimoDelete -> this.emprestimoService.deleteLoad(emprestimoDelete));
     }
 }
