@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.biblioteca.biblioteca.domain.Autor;
+import com.biblioteca.biblioteca.domain.Emprestimo;
 import com.biblioteca.biblioteca.domain.Livros;
 import com.biblioteca.biblioteca.domain.Usuario;
 import com.biblioteca.biblioteca.services.AutorService;
+import com.biblioteca.biblioteca.services.EmprestimoService;
 import com.biblioteca.biblioteca.services.LivrosService;
 import com.biblioteca.biblioteca.services.UsuarioService;
 
@@ -34,6 +36,10 @@ public class BibliotecaController {
     @Autowired
     private LivrosService livrosService;
 
+    @Autowired
+    private EmprestimoService emprestimoService;
+    
+    /*CRUD de usuários */
     @GetMapping("/usuarios")
     public ResponseEntity<Page<Usuario>> getAllUsers(Pageable pageable){
         Page<Usuario> usuarios = this.usuarioService.getAll(pageable);
@@ -47,6 +53,9 @@ public class BibliotecaController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    
+
+    /*CRUD de autores */
     @GetMapping("/autores")
     public ResponseEntity<Page<Autor>> getAllAuth(Pageable pageable){
         Page<Autor> autores = this.autorService.getAll(pageable);
@@ -60,6 +69,7 @@ public class BibliotecaController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    /*CRUD de livros */
     @GetMapping("/livros")
     public ResponseEntity<Page<Livros>> getAllBooks(Pageable pageable){
         Page<Livros> livros = this.livrosService.getAll(pageable);
@@ -73,4 +83,17 @@ public class BibliotecaController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    /*CRUD de usuários */
+    @GetMapping("/emprestimos")
+    public ResponseEntity<Page<Emprestimo>> getAllLoan(Pageable pageable){
+        Page<Emprestimo> emprestimos = this.emprestimoService.getAll(pageable);
+        return new ResponseEntity<Page<Emprestimo>>(emprestimos, HttpStatus.OK);
+    }
+
+    @GetMapping("/livros/{id}")
+    public ResponseEntity<Emprestimo> getLoanById(@PathVariable UUID id){
+        Optional<Emprestimo> emprestimo = this.emprestimoService.findbyId(id);
+        return emprestimo.map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 }
