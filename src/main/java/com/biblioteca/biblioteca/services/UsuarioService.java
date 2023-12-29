@@ -22,7 +22,7 @@ public class UsuarioService {
     }
 
     public Optional<Usuario> findbyId(UUID id){
-        return usuarioRepository.findById(id);
+        return this.usuarioRepository.findById(id);
     }
 
 

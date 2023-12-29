@@ -21,6 +21,6 @@ public class AutorService {
     }
 
     public Optional<Autor> findbyId(UUID id){
-        return autorRepository.findById(id);
+        return this.autorRepository.findById(id);
     }
 }

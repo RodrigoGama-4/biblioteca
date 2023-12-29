@@ -20,6 +20,6 @@ public class LivrosService {
     }
 
     public Optional<Livros> findbyId(String isbn){
-        return livrosRepository.findById(isbn);
+        return this.livrosRepository.findById(isbn);
     }
 }
