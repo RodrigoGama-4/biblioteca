@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
+import com.biblioteca.biblioteca.dtos.UsuarioDTO;
+
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -26,7 +28,9 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private Set<Emprestimo> emprestimos;
 
+    public Usuario(UsuarioDTO user){
 
+    }
 }
 
 

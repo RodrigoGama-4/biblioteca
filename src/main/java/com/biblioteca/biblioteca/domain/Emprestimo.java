@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
+import com.biblioteca.biblioteca.dtos.EmprestimoDTO;
+
 @Entity
 @Table(name = "emprestimo")
 public class Emprestimo {
@@ -29,5 +31,8 @@ public class Emprestimo {
     @Column(name = "data_devolucao")
     private Date dataDevolucao;
 
+    public Emprestimo(EmprestimoDTO emprestimoDTO){
+        
+    }
 }
 

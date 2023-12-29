@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
+import com.biblioteca.biblioteca.dtos.AutorDTO;
+
 @Entity
 @Table(name = "autor")
 public class Autor {
@@ -25,4 +27,7 @@ public class Autor {
     @OneToMany(mappedBy = "autor")
     private Set<LivroAutor> livros;
 
+    public Autor(AutorDTO autorDTO){
+        
+    }
 }

@@ -3,6 +3,8 @@ package com.biblioteca.biblioteca.domain;
 import jakarta.persistence.*;
 import java.util.Set;
 
+import com.biblioteca.biblioteca.dtos.LivrosDTO;
+
 @Entity
 @Table(name = "livro")
 public class Livros {
@@ -21,5 +23,8 @@ public class Livros {
     @OneToMany(mappedBy = "livro")
     private Set<LivroAutor> autores;
 
+    public Livros(LivrosDTO livrosDTO){
+
+    }
 }
 
