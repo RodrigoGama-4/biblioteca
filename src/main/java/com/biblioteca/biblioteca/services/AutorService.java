@@ -27,4 +27,8 @@ public class AutorService {
     public void saveAuth(Autor autor){
         this.autorRepository.save(autor);
     }
+
+    public void deleteAuth(Autor autor){
+        this.autorRepository.delete(autor);
+    }
 }

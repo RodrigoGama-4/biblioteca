@@ -27,4 +27,8 @@ public class EmprestimoService {
     public void saveLoad(Emprestimo emprestimo){
         this.emprestimoRepository.save(emprestimo);
     }
+
+    public void deleteLoad(Emprestimo emprestimo){
+        this.emprestimoRepository.delete(emprestimo);
+    }
 }

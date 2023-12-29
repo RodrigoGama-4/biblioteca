@@ -29,4 +29,8 @@ public class UsuarioService {
         this.usuarioRepository.save(user);
     }
 
+    public void deleteUser(Usuario user){
+        this.usuarioRepository.delete(user);
+    }
+
 }

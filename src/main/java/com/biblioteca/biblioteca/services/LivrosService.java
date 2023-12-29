@@ -26,4 +26,8 @@ public class LivrosService {
     public void saveBook(Livros livro){
         this.livrosRepository.save(livro);
     }
+
+    public void deleteBook(Livros livro){
+        this.livrosRepository.delete(livro);
+    }
 }
