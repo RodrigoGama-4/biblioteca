@@ -28,7 +28,9 @@ public class Autor {
     private Set<LivroAutor> livros;
 
     public Autor(AutorDTO autorDTO){
-        
+        this.nome = autorDTO.nome();
+        this.nacionalidade = autorDTO.nacionalidade();
+        this.nascimento = autorDTO.dt_nasci();
     }
 
     public Autor() {
