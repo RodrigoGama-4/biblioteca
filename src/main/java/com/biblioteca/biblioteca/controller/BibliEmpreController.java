@@ -1,7 +1,6 @@
 package com.biblioteca.biblioteca.controller;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,7 +35,7 @@ public class BibliEmpreController {
     }
 
     @GetMapping("/emprestimos/{id}")
-    public ResponseEntity<Emprestimo> getLoanById(@PathVariable UUID id){
+    public ResponseEntity<Emprestimo> getLoanById(@PathVariable Long id){
         Optional<Emprestimo> emprestimo = this.emprestimoService.findbyId(id);
         return emprestimo.map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -49,7 +48,7 @@ public class BibliEmpreController {
     }
 
     @DeleteMapping("/emprestimos/{id}")
-    public void deleteLoad(@PathVariable UUID id){
+    public void deleteLoad(@PathVariable Long id){
         Optional<Emprestimo> emprestimo = this.emprestimoService.findbyId(id);
         emprestimo.ifPresent(emprestimoDelete -> this.emprestimoService.deleteLoad(emprestimoDelete));
     }

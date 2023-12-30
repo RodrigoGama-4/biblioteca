@@ -1,5 +1,6 @@
 package com.biblioteca.biblioteca.domain;
 
+import com.biblioteca.biblioteca.dtos.LivrosAutorDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,5 +19,13 @@ public class LivroAutor {
     @JoinColumn(name = "autor_id", referencedColumnName = "autor_id")
     private Autor autor;
 
+    public LivroAutor(LivrosAutorDTO livrosAutorDTO){
+        this.livroAutorId = livrosAutorDTO.id();
+        this.autor = livrosAutorDTO.autorId();
+        this.livro = livrosAutorDTO.isbn();
+    }
 
+    public LivroAutor(){
+
+    }
 }

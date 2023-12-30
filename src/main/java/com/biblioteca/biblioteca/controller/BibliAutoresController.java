@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import com.biblioteca.biblioteca.services.AutorService;
 
 @RestController
 @RequestMapping("biblioteca")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 
 public class BibliAutoresController {
     
@@ -36,7 +38,7 @@ public class BibliAutoresController {
     }
 
     @GetMapping("/autores/{id}")
-    public ResponseEntity<Autor> getAuthById(@PathVariable UUID id){
+    public ResponseEntity<Autor> getAuthById(@PathVariable Long id){
         Optional<Autor> autor = this.autorService.findbyId(id);
         return autor.map(u -> new ResponseEntity<>(u, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -49,7 +51,7 @@ public class BibliAutoresController {
     }
     
     @DeleteMapping("/autores/{id}")
-    public void deleteAuth(@PathVariable UUID id){
+    public void deleteAuth(@PathVariable Long id){
         Optional<Autor> autor = this.autorService.findbyId(id);
         autor.ifPresent(autorDelete -> this.autorService.deleteAuth(autorDelete));
     }

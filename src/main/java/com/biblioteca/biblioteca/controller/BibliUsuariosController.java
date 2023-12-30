@@ -1,13 +1,13 @@
 package com.biblioteca.biblioteca.controller;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +22,8 @@ import com.biblioteca.biblioteca.services.UsuarioService;
 
 @RestController
 @RequestMapping("biblioteca")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+
 public class BibliUsuariosController {
     @Autowired
     private UsuarioService usuarioService;
@@ -34,7 +36,7 @@ public class BibliUsuariosController {
     }
 
     @GetMapping("/usuarios/{id}")
-    public ResponseEntity<Usuario> getUserById(@PathVariable UUID id){
+    public ResponseEntity<Usuario> getUserById(@PathVariable Long id){
         Optional<Usuario> user = this.usuarioService.findbyId(id);
         return user.map(u -> new ResponseEntity<>(u, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -47,7 +49,7 @@ public class BibliUsuariosController {
     }
 
     @DeleteMapping("/usuarios/{id}")
-    public void deleteUser(@PathVariable UUID id){
+    public void deleteUser(@PathVariable Long id){
         Optional<Usuario> user = this.usuarioService.findbyId(id);
         user.ifPresent(usuario -> this.usuarioService.deleteUser(usuario));
     }

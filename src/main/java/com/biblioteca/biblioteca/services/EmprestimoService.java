@@ -20,7 +20,7 @@ public class EmprestimoService {
         return this.emprestimoRepository.findAll(pageable);
     }
 
-    public Optional<Emprestimo> findbyId(UUID id){
+    public Optional<Emprestimo> findbyId(Long id){
         return this.emprestimoRepository.findById(id);
     }
 

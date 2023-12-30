@@ -1,7 +1,6 @@
 package com.biblioteca.biblioteca.services;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,7 +19,7 @@ public class AutorService {
         return this.autorRepository.findAll(pageable);
     }
 
-    public Optional<Autor> findbyId(UUID id){
+    public Optional<Autor> findbyId(Long id){
         return this.autorRepository.findById(id);
     }
 
