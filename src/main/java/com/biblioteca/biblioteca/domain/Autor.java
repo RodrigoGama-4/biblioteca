@@ -2,7 +2,6 @@ package com.biblioteca.biblioteca.domain;
 
 import jakarta.persistence.*;
 import java.util.Set;
-import java.util.UUID;
 
 import com.biblioteca.biblioteca.dtos.AutorDTO;
 
@@ -11,8 +10,9 @@ import com.biblioteca.biblioteca.dtos.AutorDTO;
 public class Autor {
 
     @Id
+    @GeneratedValue()
     @Column(name = "autor_id")
-    private UUID autorId;
+    private Long autorId;
 
     @Column(name = "nome")
     private String nome;

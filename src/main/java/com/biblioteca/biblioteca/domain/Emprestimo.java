@@ -2,7 +2,6 @@ package com.biblioteca.biblioteca.domain;
 
 import jakarta.persistence.*;
 import java.util.Date;
-import java.util.UUID;
 
 import com.biblioteca.biblioteca.dtos.EmprestimoDTO;
 
@@ -12,7 +11,7 @@ public class Emprestimo {
 
     @Id
     @Column(name = "emprestimo_id")
-    private UUID emprestimoId;
+    private Long emprestimoId;
 
     @ManyToOne
     @JoinColumn(name = "livro_isbn", referencedColumnName = "isbn")

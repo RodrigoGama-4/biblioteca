@@ -2,7 +2,6 @@ package com.biblioteca.biblioteca.domain;
 
 import jakarta.persistence.*;
 import java.util.Set;
-import java.util.UUID;
 
 import com.biblioteca.biblioteca.dtos.UsuarioDTO;
 
@@ -11,8 +10,9 @@ import com.biblioteca.biblioteca.dtos.UsuarioDTO;
 public class Usuario {
 
     @Id
-    @Column(name = "user_id")
-    private UUID userId;
+    @GeneratedValue()
+    @Column(name = "user_id", updatable = false, nullable = false)
+    private Long  userId;
 
     @Column(name = "nome")
     private String nome;
@@ -29,7 +29,9 @@ public class Usuario {
     private Set<Emprestimo> emprestimos;
 
     public Usuario(UsuarioDTO user){
-
+        this.nome = user.nome();
+        this.email = user.email();
+        this.telefone = user.telefone();
     }
 }
 
