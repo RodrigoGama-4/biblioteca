@@ -33,6 +33,10 @@ public class Usuario {
         this.email = user.email();
         this.telefone = user.telefone();
     }
+
+    public Usuario(){
+        
+    }
 }
 
 

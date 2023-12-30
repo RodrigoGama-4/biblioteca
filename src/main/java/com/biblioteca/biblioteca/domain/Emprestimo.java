@@ -10,6 +10,7 @@ import com.biblioteca.biblioteca.dtos.EmprestimoDTO;
 public class Emprestimo {
 
     @Id
+    @GeneratedValue()
     @Column(name = "emprestimo_id")
     private Long emprestimoId;
 
@@ -32,6 +33,9 @@ public class Emprestimo {
 
     public Emprestimo(EmprestimoDTO emprestimoDTO){
         
+    }
+
+    public Emprestimo() {
     }
 }
 

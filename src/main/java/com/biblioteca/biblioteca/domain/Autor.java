@@ -30,4 +30,7 @@ public class Autor {
     public Autor(AutorDTO autorDTO){
         
     }
+
+    public Autor() {
+    }
 }

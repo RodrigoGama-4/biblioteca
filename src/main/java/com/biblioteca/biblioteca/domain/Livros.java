@@ -24,6 +24,12 @@ public class Livros {
     private Set<LivroAutor> autores;
 
     public Livros(LivrosDTO livrosDTO){
+        this.isbn = livrosDTO.isbn();
+        this.paginas = livrosDTO.n_pagina();
+        this.titulo = livrosDTO.titulo();
+    }
+
+    public Livros(){
 
     }
 }
