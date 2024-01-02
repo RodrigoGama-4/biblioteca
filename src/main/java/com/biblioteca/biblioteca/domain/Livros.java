@@ -32,5 +32,9 @@ public class Livros {
     public Livros(){
 
     }
+
+    public Livros(String isbn) {
+        this.isbn = isbn;
+    }
 }
 

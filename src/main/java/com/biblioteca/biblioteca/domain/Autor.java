@@ -35,4 +35,8 @@ public class Autor {
 
     public Autor() {
     }
+
+    public Autor(Long autorId) {
+        this.autorId = autorId;
+    }
 }
