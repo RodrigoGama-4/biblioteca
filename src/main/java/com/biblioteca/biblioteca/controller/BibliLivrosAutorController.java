@@ -17,11 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.biblioteca.biblioteca.domain.LivroAutor;
-import com.biblioteca.biblioteca.domain.Livros;
 import com.biblioteca.biblioteca.dtos.LivrosAutorDTO;
-import com.biblioteca.biblioteca.dtos.LivrosDTO;
 import com.biblioteca.biblioteca.services.LivroAutorService;
-import com.biblioteca.biblioteca.services.LivrosService;
 
 @RestController
 @RequestMapping("biblioteca")
@@ -44,7 +41,7 @@ public class BibliLivrosAutorController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("livros-autores")
+    @PostMapping("/livros-autores")
     public void saveBook(@RequestBody LivrosAutorDTO livroAutorDTO){
         LivroAutor livro = new LivroAutor(livroAutorDTO);
         this.livroAutorService.saveBookAuth(livro);
