@@ -37,6 +37,11 @@ public class Usuario {
     public Usuario(){
         
     }
+
+     public Usuario(Long userId){
+        this.userId = userId;
+        
+    }
 }
 
 

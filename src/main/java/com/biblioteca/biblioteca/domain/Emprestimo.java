@@ -32,7 +32,11 @@ public class Emprestimo {
     private Date dataDevolucao;
 
     public Emprestimo(EmprestimoDTO emprestimoDTO){
-        
+        this.livro = emprestimoDTO.isbn();
+        this.usuario = emprestimoDTO.idUsuario();
+        this.dataEmprestimo = emprestimoDTO.data_emprestimo();
+        this.dataDevolucao = emprestimoDTO.data_devo();
+
     }
 
     public Emprestimo() {
