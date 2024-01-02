@@ -28,4 +28,29 @@ public class LivroAutor {
     public LivroAutor(){
 
     }
+
+    public Long getLivroAutorId() {
+        return livroAutorId;
+    }
+
+    public void setLivroAutorId(Long livroAutorId) {
+        this.livroAutorId = livroAutorId;
+    }
+
+    public Livros getLivro() {
+        return livro;
+    }
+
+    public void setLivro(Livros livro) {
+        this.livro = livro;
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
+    
 }
