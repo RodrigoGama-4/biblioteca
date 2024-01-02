@@ -22,8 +22,6 @@ import com.biblioteca.biblioteca.services.UsuarioService;
 
 @RestController
 @RequestMapping("biblioteca")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
-
 public class BibliUsuariosController {
     @Autowired
     private UsuarioService usuarioService;

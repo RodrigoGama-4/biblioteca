@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 import com.biblioteca.biblioteca.dtos.UsuarioDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "usuario")
@@ -24,7 +25,7 @@ public class Usuario {
     private String telefone;
 
     // Outros atributos do usuário
-
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario")
     private Set<Emprestimo> emprestimos;
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 import com.biblioteca.biblioteca.dtos.AutorDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "autor")
@@ -23,7 +24,7 @@ public class Autor {
     @Column(name = "nacionalidade")
     private String nacionalidade;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "autor")
     private Set<LivroAutor> livros;
 

@@ -22,8 +22,6 @@ import com.biblioteca.biblioteca.services.AutorService;
 
 @RestController
 @RequestMapping("biblioteca")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
-
 public class BibliAutoresController {
     
     @Autowired
