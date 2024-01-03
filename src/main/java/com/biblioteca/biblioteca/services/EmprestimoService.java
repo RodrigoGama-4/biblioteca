@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.biblioteca.biblioteca.Exceptio.LivrosOcupados;
 import com.biblioteca.biblioteca.domain.Emprestimo;
 import com.biblioteca.biblioteca.domain.Livros;
 import com.biblioteca.biblioteca.repository.EmprestimoRepository;
@@ -30,7 +31,7 @@ public class EmprestimoService {
     }
 
     @Transactional
-    public void saveLoad(Emprestimo emprestimo){
+    public void saveLoad(Emprestimo emprestimo) throws LivrosOcupados{
         Optional<Livros> livroOptional = this.livrosService.findbyId(emprestimo.getLivro().getIsbn());
         if (livroOptional.isPresent()){
             Livros livro = livroOptional.get();
@@ -40,7 +41,7 @@ public class EmprestimoService {
                 this.emprestimoRepository.save(emprestimo);
             }
             else{
-
+                throw new LivrosOcupados("Todos os livros estão ocupados, não é possível fazer o empréstimo.");
             }
         }
         else{
