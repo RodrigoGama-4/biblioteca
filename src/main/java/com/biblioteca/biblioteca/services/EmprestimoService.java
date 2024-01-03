@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.biblioteca.biblioteca.Exceptio.LivroNaoEncontrado;
 import com.biblioteca.biblioteca.Exceptio.LivrosOcupados;
 import com.biblioteca.biblioteca.domain.Emprestimo;
 import com.biblioteca.biblioteca.domain.Livros;
@@ -45,7 +46,7 @@ public class EmprestimoService {
             }
         }
         else{
-
+            throw new LivroNaoEncontrado(emprestimo.getLivro().getIsbn());
         }
     }
 
