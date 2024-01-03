@@ -25,6 +25,9 @@ public class Livros {
     @Column(name = "paginas")
     private String paginas;
 
+    @Column(name = "quantidade_disponivel")
+    private int quantidadeDisponivel;
+
     // Outros atributos do livro
     @JsonIgnore
     @OneToMany(mappedBy = "livro")
