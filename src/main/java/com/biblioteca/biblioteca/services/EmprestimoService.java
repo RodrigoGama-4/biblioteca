@@ -48,7 +48,21 @@ public class EmprestimoService {
         }
     }
 
-    public void deleteLoad(Emprestimo emprestimo){
-        this.emprestimoRepository.delete(emprestimo);
+    @Transactional
+    public void deleteLoad(Emprestimo empres){
+        Optional<Emprestimo> empreOptional = this.findbyId(empres.getEmprestimoId());
+        Optional<Livros> livroOptional = this.livrosService.findbyId(empres.getLivro().getIsbn());
+
+
+       if (empreOptional.isPresent() && livroOptional.isPresent()){
+            Emprestimo emprestimo = empreOptional.get();
+            Livros livro = livroOptional.get();
+
+            livro.setQuantidadeDisponivel(livro.getQuantidadeDisponivel()+1);
+            this.emprestimoRepository.delete(emprestimo);
+       }
+       else{
+
+       }
     }
 }
