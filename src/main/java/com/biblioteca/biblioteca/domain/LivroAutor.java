@@ -13,12 +13,10 @@ public class LivroAutor {
     @Column(name = "livro_autor_id", columnDefinition = "BINARY(16)")
     private Long livroAutorId;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "livro_isbn", referencedColumnName = "isbn")
     private Livros livro;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "autor_id", referencedColumnName = "autor_id")
     private Autor autor;

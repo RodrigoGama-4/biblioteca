@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 import com.biblioteca.biblioteca.dtos.EmprestimoDTO;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "emprestimo")
@@ -19,7 +18,6 @@ public class Emprestimo {
     @JoinColumn(name = "livro_isbn", referencedColumnName = "isbn")
     private Livros livro;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "usuario_id", referencedColumnName = "user_id")
     private Usuario usuario;
