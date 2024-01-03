@@ -1,10 +1,15 @@
 package com.biblioteca.biblioteca.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 
 import com.biblioteca.biblioteca.dtos.EmprestimoDTO;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "emprestimo")
 public class Emprestimo {
@@ -41,47 +46,6 @@ public class Emprestimo {
 
     public Emprestimo() {
     }
-
-    public Long getEmprestimoId() {
-        return emprestimoId;
-    }
-
-    public void setEmprestimoId(Long emprestimoId) {
-        this.emprestimoId = emprestimoId;
-    }
-
-    public Livros getLivro() {
-        return livro;
-    }
-
-    public void setLivro(Livros livro) {
-        this.livro = livro;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Date getDataEmprestimo() {
-        return dataEmprestimo;
-    }
-
-    public void setDataEmprestimo(Date dataEmprestimo) {
-        this.dataEmprestimo = dataEmprestimo;
-    }
-
-    public Date getDataDevolucao() {
-        return dataDevolucao;
-    }
-
-    public void setDataDevolucao(Date dataDevolucao) {
-        this.dataDevolucao = dataDevolucao;
-    }
-
     
 }
 

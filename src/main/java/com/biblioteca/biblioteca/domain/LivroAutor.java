@@ -1,10 +1,13 @@
 package com.biblioteca.biblioteca.domain;
 
 import com.biblioteca.biblioteca.dtos.LivrosAutorDTO;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "livro_autor")
 public class LivroAutor {
@@ -29,30 +32,6 @@ public class LivroAutor {
 
     public LivroAutor(){
 
-    }
-
-    public Long getLivroAutorId() {
-        return livroAutorId;
-    }
-
-    public void setLivroAutorId(Long livroAutorId) {
-        this.livroAutorId = livroAutorId;
-    }
-
-    public Livros getLivro() {
-        return livro;
-    }
-
-    public void setLivro(Livros livro) {
-        this.livro = livro;
-    }
-
-    public Autor getAutor() {
-        return autor;
-    }
-
-    public void setAutor(Autor autor) {
-        this.autor = autor;
     }
     
 }

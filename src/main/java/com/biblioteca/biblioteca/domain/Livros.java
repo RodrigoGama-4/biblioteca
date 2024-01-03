@@ -1,11 +1,16 @@
 package com.biblioteca.biblioteca.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Set;
 
 import com.biblioteca.biblioteca.dtos.LivrosDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "livro")
 public class Livros {
@@ -38,39 +43,6 @@ public class Livros {
     public Livros(String isbn) {
         this.isbn = isbn;
     }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getPaginas() {
-        return paginas;
-    }
-
-    public void setPaginas(String paginas) {
-        this.paginas = paginas;
-    }
-
-    public Set<LivroAutor> getAutores() {
-        return autores;
-    }
-
-    public void setAutores(Set<LivroAutor> autores) {
-        this.autores = autores;
-    }
-
     
 }
 
