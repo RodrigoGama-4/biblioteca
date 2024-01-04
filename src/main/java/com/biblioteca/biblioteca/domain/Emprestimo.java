@@ -2,6 +2,7 @@ package com.biblioteca.biblioteca.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
@@ -11,6 +12,7 @@ import com.biblioteca.biblioteca.dtos.EmprestimoDTO;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "emprestimo")
 public class Emprestimo {
 
@@ -42,9 +44,6 @@ public class Emprestimo {
         this.dataEmprestimo = emprestimoDTO.data_emprestimo();
         this.dataDevolucao = emprestimoDTO.data_devo();
 
-    }
-
-    public Emprestimo() {
     }
     
 }

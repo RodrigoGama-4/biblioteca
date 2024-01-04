@@ -1,7 +1,9 @@
 package com.biblioteca.biblioteca.domain;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
@@ -9,9 +11,11 @@ import java.util.Set;
 import com.biblioteca.biblioteca.dtos.LivrosDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Data
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "livro")
 public class Livros {
 
@@ -37,10 +41,7 @@ public class Livros {
         this.isbn = livrosDTO.isbn();
         this.paginas = livrosDTO.n_pagina();
         this.titulo = livrosDTO.titulo();
-    }
-
-    public Livros(){
-
+        this.quantidadeDisponivel = livrosDTO.quantidadeDisponivel();
     }
 
     public Livros(String isbn) {

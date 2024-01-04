@@ -4,11 +4,13 @@ import com.biblioteca.biblioteca.dtos.LivrosAutorDTO;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "livro_autor")
 public class LivroAutor {
 
@@ -28,10 +30,6 @@ public class LivroAutor {
         this.livroAutorId = livrosAutorDTO.id();
         this.autor = livrosAutorDTO.autorId();
         this.livro = livrosAutorDTO.isbn();
-    }
-
-    public LivroAutor(){
-
     }
     
 }

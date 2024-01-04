@@ -2,6 +2,7 @@ package com.biblioteca.biblioteca.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "usuario")
 public class Usuario {
 
@@ -39,10 +41,6 @@ public class Usuario {
         this.nome = user.nome();
         this.email = user.email();
         this.telefone = user.telefone();
-    }
-
-    public Usuario(){
-        
     }
 
      public Usuario(Long userId){
