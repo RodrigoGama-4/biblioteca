@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.biblioteca.biblioteca.Exceptio.LivrosOcupados;
 import com.biblioteca.biblioteca.domain.Emprestimo;
 import com.biblioteca.biblioteca.dtos.EmprestimoDTO;
+import com.biblioteca.biblioteca.exceptions.LivrosOcupadosException;
 import com.biblioteca.biblioteca.services.EmprestimoService;
 
 @RestController
@@ -43,7 +43,7 @@ public class BibliEmpreController {
     }
 
     @PostMapping("emprestimos")
-    public void saveLoad(@RequestBody EmprestimoDTO emprestimoDTO) throws LivrosOcupados{
+    public void saveLoad(@RequestBody EmprestimoDTO emprestimoDTO) throws LivrosOcupadosException{
         Emprestimo emprestimo = new Emprestimo(emprestimoDTO);
         this.emprestimoService.saveLoad(emprestimo);
     }

@@ -8,10 +8,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.biblioteca.biblioteca.Exceptio.LivroNaoEncontrado;
-import com.biblioteca.biblioteca.Exceptio.LivrosOcupados;
 import com.biblioteca.biblioteca.domain.Emprestimo;
 import com.biblioteca.biblioteca.domain.Livros;
+import com.biblioteca.biblioteca.exceptions.EmprestimoNaoEncontradoException;
+import com.biblioteca.biblioteca.exceptions.LivroNaoEncontradoException;
+import com.biblioteca.biblioteca.exceptions.LivrosOcupadosException;
 import com.biblioteca.biblioteca.repository.EmprestimoRepository;
 
 
@@ -32,7 +33,7 @@ public class EmprestimoService {
     }
 
     @Transactional
-    public void saveLoad(Emprestimo emprestimo) throws LivrosOcupados{
+    public void saveLoad(Emprestimo emprestimo) throws LivrosOcupadosException{
         Optional<Livros> livroOptional = this.livrosService.findbyId(emprestimo.getLivro().getIsbn());
         if (livroOptional.isPresent()){
             Livros livro = livroOptional.get();
@@ -42,16 +43,16 @@ public class EmprestimoService {
                 this.emprestimoRepository.save(emprestimo);
             }
             else{
-                throw new LivrosOcupados("Todos os livros estão ocupados, não é possível fazer o empréstimo.");
+                throw new LivrosOcupadosException("Todos os livros estão ocupados, não é possível fazer o empréstimo.");
             }
         }
         else{
-            throw new LivroNaoEncontrado(emprestimo.getLivro().getIsbn());
+            throw new LivroNaoEncontradoException(emprestimo.getLivro().getIsbn());
         }
     }
 
     @Transactional
-    public void deleteLoad(Emprestimo empres){
+    public void deleteLoad(Emprestimo empres) {
         Optional<Emprestimo> empreOptional = this.findbyId(empres.getEmprestimoId());
         Optional<Livros> livroOptional = this.livrosService.findbyId(empres.getLivro().getIsbn());
 
@@ -64,7 +65,7 @@ public class EmprestimoService {
             this.emprestimoRepository.delete(emprestimo);
        }
        else{
-
+            throw new EmprestimoNaoEncontradoException("Empréstimo não encontrado");
        }
     }
 }
