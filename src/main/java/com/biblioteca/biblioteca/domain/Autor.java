@@ -2,6 +2,7 @@ package com.biblioteca.biblioteca.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Setter
 @Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "autor")
 public class Autor {
 
@@ -37,9 +39,6 @@ public class Autor {
         this.nome = autorDTO.nome();
         this.nacionalidade = autorDTO.nacionalidade();
         this.nascimento = autorDTO.dt_nasci();
-    }
-
-    public Autor() {
     }
 
     public Autor(Long autorId) {
