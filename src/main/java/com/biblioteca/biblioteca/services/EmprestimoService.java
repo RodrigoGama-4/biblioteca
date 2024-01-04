@@ -13,6 +13,7 @@ import com.biblioteca.biblioteca.domain.Livros;
 import com.biblioteca.biblioteca.exceptions.EmprestimoNaoEncontradoException;
 import com.biblioteca.biblioteca.exceptions.LivroNaoEncontradoException;
 import com.biblioteca.biblioteca.exceptions.LivrosOcupadosException;
+import com.biblioteca.biblioteca.exceptions.UsuarioPossuiLivroExcepction;
 import com.biblioteca.biblioteca.repository.EmprestimoRepository;
 
 
@@ -33,8 +34,14 @@ public class EmprestimoService {
     }
 
     @Transactional
-    public void saveLoad(Emprestimo emprestimo) throws LivrosOcupadosException{
+    public void saveLoad(Emprestimo emprestimo) throws RuntimeException{
+
+        if (this.userHasBook(emprestimo.getLivro().getIsbn(), emprestimo.getUsuario().getUserId())){
+            throw new UsuarioPossuiLivroExcepction("Usuário já possui Livro");
+        }
+
         Optional<Livros> livroOptional = this.livrosService.findbyId(emprestimo.getLivro().getIsbn());
+        
         if (livroOptional.isPresent()){
             Livros livro = livroOptional.get();
 
@@ -67,5 +74,11 @@ public class EmprestimoService {
        else{
             throw new EmprestimoNaoEncontradoException("Empréstimo não encontrado");
        }
+    }
+
+    /*Garantir que cada usuário nao tenha duas vezes o mesmo livro */
+    private boolean userHasBook(String isbn, Long idUsuario){
+        return this.emprestimoRepository.existsByLivroIsbn(isbn);
+
     }
 }
