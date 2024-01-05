@@ -78,7 +78,9 @@ public class EmprestimoService {
 
     /*Garantir que cada usuário nao tenha duas vezes o mesmo livro */
     private boolean userHasBook(String isbn, Long idUsuario){
-        return this.emprestimoRepository.existsByLivroIsbn(isbn);
+        Emprestimo emprestimo = emprestimoRepository.findByIsbnAndUsuarioId(isbn, idUsuario);
+        boolean exists = emprestimo != null;
+        return exists;
 
     }
 }
