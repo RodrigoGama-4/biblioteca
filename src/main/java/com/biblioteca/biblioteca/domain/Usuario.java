@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "usuario")
+@Table(name = "usuario", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class Usuario {
 
     @Id
@@ -26,7 +26,7 @@ public class Usuario {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "telefone")
