@@ -1,5 +1,7 @@
 package com.biblioteca.biblioteca.services.mail;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -9,8 +11,12 @@ import org.springframework.beans.factory.annotation.Value;
 
 /*USAR LOG PARA VER SE O EMAIL FOI ENVIADO CORRETAMENTE */
 
+
+
 @Service
 public class MailService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MailService.class);
+
     @Autowired
     private JavaMailSender mailSender;
 
@@ -26,7 +32,7 @@ public class MailService {
         
 
         mailSender.send(simpleMailMessage);
-
+        LOGGER.info("Email enviado com sucesso ao endereço: " + email);
     }
 
 }
