@@ -4,17 +4,22 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.biblioteca.biblioteca.domain.Usuario;
 import com.biblioteca.biblioteca.repository.UsuarioRepository;
+import com.biblioteca.biblioteca.services.mail.MailService;
 
 @Service
 public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private MailService mailService;
 
     public Page<Usuario> getAll(Pageable pageable){
         return this.usuarioRepository.findAll(pageable);
@@ -26,6 +31,8 @@ public class UsuarioService {
 
     public void saveUser(Usuario user){
         this.usuarioRepository.save(user);
+        // Enviar o e-mail de forma assíncrona
+        CompletableFuture.runAsync(() -> this.mailService.senderMail(user.getNome(), user.getEmail()));
     }
 
     public void deleteUser(Usuario user){
