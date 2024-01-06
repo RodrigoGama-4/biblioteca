@@ -23,11 +23,11 @@ public class MailService {
     @Value("${spring.mail.username}")
     private String fromMail;
 
-    public void senderMail(String nome, String email){
+    public void senderMail(String nome, String email, String tituloEmail, String corpoEmail){
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(fromMail);
-        simpleMailMessage.setSubject("CADASTRADO NA BIBLIOTECA");
-        simpleMailMessage.setText("Olá," + nome + " agora você pode alugar livros a vontade na nossa biblioteca");
+        simpleMailMessage.setSubject(tituloEmail);
+        simpleMailMessage.setText("Olá," + nome + corpoEmail);
         simpleMailMessage.setTo(email);
         
 

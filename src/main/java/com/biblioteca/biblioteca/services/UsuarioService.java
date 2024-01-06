@@ -32,7 +32,7 @@ public class UsuarioService {
     public void saveUser(Usuario user){
         this.usuarioRepository.save(user);
         // Enviar o e-mail de forma assíncrona
-        CompletableFuture.runAsync(() -> this.mailService.senderMail(user.getNome(), user.getEmail()));
+        CompletableFuture.runAsync(() -> this.mailService.senderMail(user.getNome(), user.getEmail(), "CADASTRO NA NOSSA BIBLIOTECA", "Parabéns, agora você pode alugar livros a vontade"));
     }
 
     public void deleteUser(Usuario user){

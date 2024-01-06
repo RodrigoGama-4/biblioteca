@@ -1,6 +1,7 @@
 package com.biblioteca.biblioteca.services;
 
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,7 @@ import com.biblioteca.biblioteca.exceptions.LivroNaoEncontradoException;
 import com.biblioteca.biblioteca.exceptions.LivrosOcupadosException;
 import com.biblioteca.biblioteca.exceptions.UsuarioPossuiLivroExcepction;
 import com.biblioteca.biblioteca.repository.EmprestimoRepository;
+import com.biblioteca.biblioteca.services.mail.MailService;
 
 
 @Service
@@ -24,6 +26,9 @@ public class EmprestimoService {
 
     @Autowired
     private LivrosService livrosService;
+
+    @Autowired
+    private MailService mailService;
 
     public Page<Emprestimo> getAll(Pageable pageable){
         return this.emprestimoRepository.findAll(pageable);
@@ -37,7 +42,7 @@ public class EmprestimoService {
     public void saveLoad(Emprestimo emprestimo) throws RuntimeException{
 
         if (this.userHasBook(emprestimo.getLivro().getIsbn(), emprestimo.getUsuario().getUserId())){
-            throw new UsuarioPossuiLivroExcepction("Usuário já possui Livro");
+            throw new UsuarioPossuiLivroExcepction("Usuário já possui esse Livro");
         }
 
         Optional<Livros> livroOptional = this.livrosService.findbyId(emprestimo.getLivro().getIsbn());
@@ -48,6 +53,12 @@ public class EmprestimoService {
             if ( livro.getQuantidadeDisponivel() > 0){
                 livro.setQuantidadeDisponivel(livro.getQuantidadeDisponivel() - 1);
                 this.emprestimoRepository.save(emprestimo);
+
+                // Enviar o e-mail de forma assíncrona
+                CompletableFuture.runAsync(() -> this.mailService.senderMail(emprestimo.getUsuario().getNome(), 
+                                                                            emprestimo.getUsuario().getEmail(),
+                                                                "Aluguel de livros", 
+                                                                            "Parabéns, você alugou o livro: "+ emprestimo.getLivro().getTitulo()));
             }
             else{
                 throw new LivrosOcupadosException("Todos os livros estão ocupados, não é possível fazer o empréstimo.");
