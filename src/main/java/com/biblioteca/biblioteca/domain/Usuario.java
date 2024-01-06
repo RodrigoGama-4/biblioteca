@@ -26,6 +26,9 @@ public class Usuario {
     @Column(name = "nome")
     private String nome;
 
+    @Column(nullable = false) 
+    private String senha;
+
     @Column(name = "email", unique = true)
     private String email;
 
@@ -41,6 +44,7 @@ public class Usuario {
         this.nome = user.nome();
         this.email = user.email();
         this.telefone = user.telefone();
+        this.senha = user.senha();
     }
 
      public Usuario(Long userId){
