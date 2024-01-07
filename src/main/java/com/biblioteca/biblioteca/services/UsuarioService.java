@@ -2,6 +2,7 @@ package com.biblioteca.biblioteca.services;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -29,7 +30,7 @@ public class UsuarioService {
         return this.usuarioRepository.findById(id);
     }
 
-    public Usuario findbyEmail(String email){
+    public UserDetails findbyEmail(String email){
         return this.usuarioRepository.findByEmail(email);
     }
 
