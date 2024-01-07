@@ -29,6 +29,10 @@ public class UsuarioService {
         return this.usuarioRepository.findById(id);
     }
 
+    public Usuario findbyEmail(String email){
+        return this.usuarioRepository.findByEmail(email);
+    }
+
     public void saveUser(Usuario user){
         this.usuarioRepository.save(user);
         // Enviar o e-mail de forma assíncrona
