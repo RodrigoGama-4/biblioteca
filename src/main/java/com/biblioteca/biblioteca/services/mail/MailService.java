@@ -14,8 +14,6 @@ import org.springframework.stereotype.Service;
 
 import com.biblioteca.biblioteca.domain.Emprestimo;
 import com.biblioteca.biblioteca.repository.EmprestimoRepository;
-import com.biblioteca.biblioteca.services.EmprestimoService;
-
 import org.springframework.beans.factory.annotation.Value;
 
 /*USAR LOG PARA VER SE O EMAIL FOI ENVIADO CORRETAMENTE */
