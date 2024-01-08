@@ -42,6 +42,7 @@ public class MailService {
         for (Emprestimo emprestimo: emprestimos){
             this.senderMail(emprestimo.getUsuario().getNome(), emprestimo.getUsuario().getEmail(),
              "DIA DA DEVOLUÇÃO", "Prezado, o dia da devolução do livro chegou, por favor nos entregue o livro: " + emprestimo.getLivro().getTitulo() + "que estar pendente.");
+             LOGGER.info("Email ao email: " + emprestimo.getUsuario().getEmail() + " enviado com sucesso.d");
         }
     }
 
