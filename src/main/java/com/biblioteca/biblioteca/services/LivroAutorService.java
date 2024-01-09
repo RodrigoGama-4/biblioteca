@@ -23,8 +23,8 @@ public class LivroAutorService {
         return this.livroAutorRepository.findById(id);
     }
 
-    public void saveBookAuth(LivroAutor livroAutor){
-        this.livroAutorRepository.save(livroAutor);
+    public LivroAutor saveBookAuth(LivroAutor livroAutor){
+        return this.livroAutorRepository.save(livroAutor);
     }
 
     public void deleteBookAuth(LivroAutor livroAutor){

@@ -39,7 +39,7 @@ public class EmprestimoService {
     }
 
     @Transactional
-    public Emprestimo saveLoad(Emprestimo emprestimo) throws RuntimeException{
+    public Emprestimo saveLoan(Emprestimo emprestimo) throws RuntimeException{
 
         if (this.userHasBook(emprestimo.getLivro().getIsbn(), emprestimo.getUsuario().getUserId())){
             throw new UsuarioPossuiLivroExcepction("Usuário já possui esse Livro");
@@ -72,7 +72,7 @@ public class EmprestimoService {
     }
 
     @Transactional
-    public void deleteLoad(Emprestimo empres) {
+    public void deleteLoan(Emprestimo empres) {
         Optional<Emprestimo> empreOptional = this.findbyId(empres.getEmprestimoId());
         Optional<Livros> livroOptional = this.livrosService.findbyId(empres.getLivro().getIsbn());
 

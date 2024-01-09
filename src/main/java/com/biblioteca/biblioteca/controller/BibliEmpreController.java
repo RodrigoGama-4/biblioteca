@@ -45,20 +45,20 @@ public class BibliEmpreController {
     }
 
     @PostMapping("emprestimos")
-    public void saveLoad(@RequestBody EmprestimoDTO emprestimoDTO) throws LivrosOcupadosException{
+    public void saveLoan(@RequestBody EmprestimoDTO emprestimoDTO) throws LivrosOcupadosException{
         Emprestimo emprestimo = new Emprestimo(emprestimoDTO);
-        this.emprestimoService.saveLoad(emprestimo);
+        this.emprestimoService.saveLoan(emprestimo);
     }
 
     @DeleteMapping("/emprestimos/{id}")
-    public void deleteLoad(@PathVariable Long id){
+    public void deleteLoan(@PathVariable Long id){
         Optional<Emprestimo> emprestimo = this.emprestimoService.findbyId(id);
-        emprestimo.ifPresent(emprestimoDelete -> this.emprestimoService.deleteLoad(emprestimoDelete));
+        emprestimo.ifPresent(emprestimoDelete -> this.emprestimoService.deleteLoan(emprestimoDelete));
     }
 
     @Transactional
     @PutMapping("/emprestimo/{id}")
-    public ResponseEntity<Emprestimo> putAuth(@PathVariable Long id, @RequestBody EmprestimoDTO emprestimoDTO ) {
+    public ResponseEntity<Emprestimo> putLoan(@PathVariable Long id, @RequestBody EmprestimoDTO emprestimoDTO ) {
         Optional<Emprestimo> emprestimoOptional = this.emprestimoService.findbyId(id);
 
         if (emprestimoOptional.isPresent()) {
@@ -69,7 +69,7 @@ public class BibliEmpreController {
             emprestimo.setUsuario(emprestimoDTO.idUsuario());
 
 
-            Emprestimo emprestimoAtualizado = this.emprestimoService.saveLoad(emprestimo);
+            Emprestimo emprestimoAtualizado = this.emprestimoService.saveLoan(emprestimo);
 
             return new ResponseEntity<>(emprestimoAtualizado, HttpStatus.OK);
         } else {
