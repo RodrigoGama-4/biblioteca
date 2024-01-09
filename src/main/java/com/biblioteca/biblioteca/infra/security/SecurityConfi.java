@@ -28,7 +28,10 @@ public class SecurityConfi {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers(HttpMethod.GET, "/biblioteca/autores").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/biblioteca/autores/{id}").permitAll()
+
+                        .anyRequest().permitAll()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
