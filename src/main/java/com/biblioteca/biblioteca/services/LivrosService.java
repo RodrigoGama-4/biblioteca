@@ -23,8 +23,8 @@ public class LivrosService {
         return this.livrosRepository.findById(isbn);
     }
 
-    public void saveBook(Livros livro){
-        this.livrosRepository.save(livro);
+    public Livros saveBook(Livros livro){
+        return this.livrosRepository.save(livro);
     }
 
     public void deleteBook(Livros livro){

@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.biblioteca.biblioteca.domain.Emprestimo;
 import com.biblioteca.biblioteca.domain.Usuario;
-import com.biblioteca.biblioteca.dtos.EmprestimoDTO;
 import com.biblioteca.biblioteca.dtos.UsuarioDTO;
 import com.biblioteca.biblioteca.services.UsuarioService;
 
