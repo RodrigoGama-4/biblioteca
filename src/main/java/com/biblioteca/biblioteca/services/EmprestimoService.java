@@ -39,7 +39,7 @@ public class EmprestimoService {
     }
 
     @Transactional
-    public void saveLoad(Emprestimo emprestimo) throws RuntimeException{
+    public Emprestimo saveLoad(Emprestimo emprestimo) throws RuntimeException{
 
         if (this.userHasBook(emprestimo.getLivro().getIsbn(), emprestimo.getUsuario().getUserId())){
             throw new UsuarioPossuiLivroExcepction("Usuário já possui esse Livro");
@@ -52,13 +52,15 @@ public class EmprestimoService {
 
             if ( livro.getQuantidadeDisponivel() > 0){
                 livro.setQuantidadeDisponivel(livro.getQuantidadeDisponivel() - 1);
-                this.emprestimoRepository.save(emprestimo);
+                Emprestimo emprestimoSalvo = this.emprestimoRepository.save(emprestimo);
 
                 // Enviar o e-mail de forma assíncrona
                 CompletableFuture.runAsync(() -> this.mailService.senderMail(emprestimo.getUsuario().getNome(), 
                                                                             emprestimo.getUsuario().getEmail(),
                                                                 "Aluguel de livros", 
                                                                             "Parabéns, você alugou o livro: "+ emprestimo.getLivro().getTitulo()));
+                
+                return emprestimoSalvo;
             }
             else{
                 throw new LivrosOcupadosException("Todos os livros estão ocupados, não é possível fazer o empréstimo.");

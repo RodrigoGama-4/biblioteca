@@ -34,10 +34,11 @@ public class UsuarioService {
         return this.usuarioRepository.findByEmail(email);
     }
 
-    public void saveUser(Usuario user){
-        this.usuarioRepository.save(user);
+    public Usuario saveUser(Usuario user){
+        Usuario usuarioSalvo = this.usuarioRepository.save(user);
         // Enviar o e-mail de forma assíncrona
         CompletableFuture.runAsync(() -> this.mailService.senderMail(user.getNome(), user.getEmail(), "CADASTRO NA NOSSA BIBLIOTECA", "Parabéns, agora você pode alugar livros a vontade"));
+        return usuarioSalvo;
     }
 
     public void deleteUser(Usuario user){

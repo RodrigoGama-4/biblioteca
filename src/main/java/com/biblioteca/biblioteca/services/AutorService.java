@@ -23,8 +23,8 @@ public class AutorService {
         return this.autorRepository.findById(id);
     }
 
-    public void saveAuth(Autor autor){
-        this.autorRepository.save(autor);
+    public Autor saveAuth(Autor autor){
+        return this.autorRepository.save(autor);
     }
 
     public void deleteAuth(Autor autor){
