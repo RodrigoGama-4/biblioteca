@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,12 +42,6 @@ public class BibliUsuariosController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/usuarios")
-    public void saveUser(@RequestBody UsuarioDTO usuarioDTO ){
-        Usuario user = new Usuario(usuarioDTO);
-        this.usuarioService.saveUser(user);
-    }
-
     @DeleteMapping("/usuarios/{id}")
     public void deleteUser(@PathVariable Long id){
         Optional<Usuario> user = this.usuarioService.findbyId(id);
@@ -54,16 +49,20 @@ public class BibliUsuariosController {
     }
 
     @Transactional
-    @PutMapping("/usuario/{id}")
-    public ResponseEntity<Usuario> putAuth(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO ) {
+    @PutMapping("/usuarios/{id}")
+    public ResponseEntity<Usuario> putUser(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO ) {
         Optional<Usuario> usuarioOptional = this.usuarioService.findbyId(id);
 
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
+
+            //CRIPTOGRAFANDO SENHA
+            String senhaEncript = new BCryptPasswordEncoder().encode(usuarioDTO.senha());
+
             usuario.setEmail(usuarioDTO.email());
             usuario.setNome(usuarioDTO.nome());
             usuario.setTelefone(usuarioDTO.telefone());
-            usuario.setSenha(usuarioDTO.senha());
+            usuario.setSenha(senhaEncript);
 
             Usuario usuarioAtualizado = this.usuarioService.saveUser(usuario);
             return new ResponseEntity<>(usuarioAtualizado, HttpStatus.OK);

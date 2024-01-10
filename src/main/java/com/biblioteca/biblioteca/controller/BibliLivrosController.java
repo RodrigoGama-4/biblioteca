@@ -59,7 +59,7 @@ public class BibliLivrosController {
 
     @Transactional
     @PutMapping("/livros/{id}")
-    public ResponseEntity<Livros> putAuth(@PathVariable String isbn, @RequestBody LivrosDTO livrosDTO ) {
+    public ResponseEntity<Livros> putBook(@PathVariable String isbn, @RequestBody LivrosDTO livrosDTO ) {
         Optional<Livros> livrOptional = this.livrosService.findbyId(isbn);
 
         if (livrOptional.isPresent()) {
