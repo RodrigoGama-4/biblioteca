@@ -37,7 +37,7 @@ public class UsuarioService {
     public Usuario saveUser(Usuario user){
         Usuario usuarioSalvo = this.usuarioRepository.save(user);
         // Enviar o e-mail de forma assíncrona
-        //CompletableFuture.runAsync(() -> this.mailService.senderMail(user.getNome(), user.getEmail(), "CADASTRO NA NOSSA BIBLIOTECA", "Parabéns, agora você pode alugar livros a vontade"));
+        CompletableFuture.runAsync(() -> this.mailService.senderMail(user.getNome(), user.getEmail(), "CADASTRO NA NOSSA BIBLIOTECA", "Parabéns, agora você pode alugar livros a vontade"));
         return usuarioSalvo;
     }
 
