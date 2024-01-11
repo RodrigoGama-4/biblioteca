@@ -1,6 +1,7 @@
 package com.biblioteca.biblioteca.services;
 
 import java.util.Optional;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.biblioteca.biblioteca.domain.Emprestimo;
 import com.biblioteca.biblioteca.domain.Livros;
+import com.biblioteca.biblioteca.domain.Usuario;
 import com.biblioteca.biblioteca.exceptions.EmprestimoNaoEncontradoException;
 import com.biblioteca.biblioteca.exceptions.LivroNaoEncontradoException;
 import com.biblioteca.biblioteca.exceptions.LivrosOcupadosException;
@@ -36,6 +38,10 @@ public class EmprestimoService {
 
     public Optional<Emprestimo> findbyId(Long id){
         return this.emprestimoRepository.findById(id);
+    }
+
+    public List<Emprestimo> findByUser(Usuario user){
+        return this.emprestimoRepository.findByUsuario(user);
     }
 
     @Transactional

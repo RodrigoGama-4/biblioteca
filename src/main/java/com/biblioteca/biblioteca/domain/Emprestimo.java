@@ -26,7 +26,7 @@ public class Emprestimo {
     private Livros livro;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_idfk", referencedColumnName = "user_id")
     private Usuario usuario;
 
 

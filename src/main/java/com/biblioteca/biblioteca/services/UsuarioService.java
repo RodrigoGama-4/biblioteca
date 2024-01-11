@@ -5,12 +5,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.biblioteca.biblioteca.domain.Emprestimo;
 import com.biblioteca.biblioteca.domain.Usuario;
+import com.biblioteca.biblioteca.exceptions.UsuarioEmprestimoException;
 import com.biblioteca.biblioteca.repository.UsuarioRepository;
 import com.biblioteca.biblioteca.services.mail.MailService;
 
@@ -21,6 +24,9 @@ public class UsuarioService {
 
     @Autowired
     private MailService mailService;
+
+    @Autowired
+    private EmprestimoService emprestimoService;
 
     public Page<Usuario> getAll(Pageable pageable){
         return this.usuarioRepository.findAll(pageable);
@@ -42,7 +48,15 @@ public class UsuarioService {
     }
 
     public void deleteUser(Usuario user){
-        this.usuarioRepository.delete(user);
+        List<Emprestimo> emprestimos = this.emprestimoService.findByUser(user);
+        if (emprestimos.isEmpty()){
+            this.usuarioRepository.delete(user);
+        }
+        else{
+            throw new UsuarioEmprestimoException(user);
+        }
+
+
     }
 
 }
