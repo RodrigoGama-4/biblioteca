@@ -44,6 +44,10 @@ public class EmprestimoService {
         return this.emprestimoRepository.findByUsuario(user);
     }
 
+    public List<Emprestimo> findByLivro(Livros livro){
+        return this.emprestimoRepository.findByLivro(livro);
+    }
+
     @Transactional
     public Emprestimo saveLoan(Emprestimo emprestimo) throws RuntimeException{
 

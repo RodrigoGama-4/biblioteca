@@ -12,6 +12,7 @@ import com.biblioteca.biblioteca.domain.Emprestimo;
 import com.biblioteca.biblioteca.domain.LivroAutor;
 import com.biblioteca.biblioteca.domain.Livros;
 import com.biblioteca.biblioteca.exceptions.LivrosAutoresException;
+import com.biblioteca.biblioteca.repository.EmprestimoRepository;
 import com.biblioteca.biblioteca.repository.LivrosRepository;
 
 @Service
@@ -23,7 +24,7 @@ public class LivrosService {
     private LivroAutorService livroAutorService;
 
     @Autowired
-    private EmprestimoService emprestimoService;
+    private EmprestimoRepository emprestimoRepository;
 
     public Page<Livros> getAll(Pageable pageable){
         return this.livrosRepository.findAll(pageable);
@@ -40,7 +41,7 @@ public class LivrosService {
     public void deleteBook(Livros livro){   
         List<LivroAutor> livrosAutores = this.livroAutorService.livrosAutores(livro);
 
-        List<Emprestimo> emprestimoLivros = this.emprestimoService.findByLivro(livro);
+        List<Emprestimo> emprestimoLivros = this.emprestimoRepository.findByLivro(livro);
         if (livrosAutores.isEmpty() && emprestimoLivros.isEmpty()){
             this.livrosRepository.delete(livro);
         }
