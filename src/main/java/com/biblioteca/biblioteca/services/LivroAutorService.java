@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.biblioteca.biblioteca.domain.Autor;
 import com.biblioteca.biblioteca.domain.LivroAutor;
 import com.biblioteca.biblioteca.domain.Livros;
 import com.biblioteca.biblioteca.repository.LivroAutorRepository;
@@ -35,5 +36,9 @@ public class LivroAutorService {
 
     public List<LivroAutor> livrosAutores(Livros livro){
         return this.livroAutorRepository.findByLivro(livro);
+    }
+
+    public List<LivroAutor> livrosAutoresAuth(Autor auth){
+        return this.livroAutorRepository.findByAutor(auth);
     }
 }
