@@ -28,6 +28,7 @@ public class AutorService {
     }
 
     public void deleteAuth(Autor autor){
+        
         this.autorRepository.delete(autor);
     }
 }
