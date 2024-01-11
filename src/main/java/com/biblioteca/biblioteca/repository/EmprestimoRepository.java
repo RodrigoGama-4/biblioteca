@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.biblioteca.biblioteca.domain.Emprestimo;
+import com.biblioteca.biblioteca.domain.Livros;
 import com.biblioteca.biblioteca.domain.Usuario;
 
 public interface EmprestimoRepository extends JpaRepository<Emprestimo, Long>{
@@ -16,5 +17,7 @@ public interface EmprestimoRepository extends JpaRepository<Emprestimo, Long>{
 
     List<Emprestimo> findByDataDevolucaoBeforeAndDataDevolucaoIsNotNull(LocalDate dataDevolucao);
     List<Emprestimo> findByUsuario(Usuario usuario);
+    List<Emprestimo> findByLivro(Livros livro);
+
 
 }

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.biblioteca.biblioteca.domain.Emprestimo;
 import com.biblioteca.biblioteca.domain.LivroAutor;
 import com.biblioteca.biblioteca.domain.Livros;
 import com.biblioteca.biblioteca.exceptions.LivrosAutoresException;
@@ -20,6 +21,9 @@ public class LivrosService {
 
     @Autowired
     private LivroAutorService livroAutorService;
+
+    @Autowired
+    private EmprestimoService emprestimoService;
 
     public Page<Livros> getAll(Pageable pageable){
         return this.livrosRepository.findAll(pageable);
@@ -35,7 +39,9 @@ public class LivrosService {
 
     public void deleteBook(Livros livro){   
         List<LivroAutor> livrosAutores = this.livroAutorService.livrosAutores(livro);
-        if (livrosAutores.isEmpty()){
+
+        List<Emprestimo> emprestimoLivros = this.emprestimoService.findByLivro(livro);
+        if (livrosAutores.isEmpty() && emprestimoLivros.isEmpty()){
             this.livrosRepository.delete(livro);
         }
         else{
