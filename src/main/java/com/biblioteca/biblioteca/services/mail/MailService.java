@@ -16,9 +16,6 @@ import com.biblioteca.biblioteca.domain.Emprestimo;
 import com.biblioteca.biblioteca.repository.EmprestimoRepository;
 import org.springframework.beans.factory.annotation.Value;
 
-/*USAR LOG PARA VER SE O EMAIL FOI ENVIADO CORRETAMENTE */
-/* FAZER UM ARQUIVO QUE ARMAZENE TODOS OS EMAILS PARA EU CONSEGUIR VER */
-
 
 @Service
 public class MailService {
