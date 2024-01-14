@@ -28,7 +28,7 @@ public class Usuario implements UserDetails {
     @Column(name = "user_id", updatable = false, nullable = false)
     private Long  userId;
 
-    @Column(name = "cpf")
+    @Column(name = "cpf", unique = true)
     private String cpf;
 
     @Column(name = "nome")
