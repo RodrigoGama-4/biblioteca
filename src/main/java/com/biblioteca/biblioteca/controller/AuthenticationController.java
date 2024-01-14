@@ -37,8 +37,9 @@ public class AuthenticationController {
         if(this.usuarioService.findbyEmail(data.email()) != null) return ResponseEntity.badRequest().build();
         
         String senhaEncript = new BCryptPasswordEncoder().encode(data.senha());
-    
-        Usuario user = new Usuario(data.nome(), senhaEncript, data.email(), data.telefone());
+        
+        //JOGAR PRO SERVICE VERIFICAR O CPF AQ
+        Usuario user = new Usuario(data.cpf(),data.nome(), senhaEncript, data.email(), data.telefone());
         this.usuarioService.saveUser(user);
     
         return ResponseEntity.ok().build();

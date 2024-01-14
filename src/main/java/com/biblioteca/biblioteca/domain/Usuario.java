@@ -28,6 +28,9 @@ public class Usuario implements UserDetails {
     @Column(name = "user_id", updatable = false, nullable = false)
     private Long  userId;
 
+    @Column(name = "cpf")
+    private String cpf;
+
     @Column(name = "nome")
     private String nome;
 
@@ -57,7 +60,8 @@ public class Usuario implements UserDetails {
         
     }
 
-    public Usuario(String nome, String senha, String email, String telefone){
+    public Usuario(String cpf, String nome, String senha, String email, String telefone){
+        this.cpf = cpf;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
