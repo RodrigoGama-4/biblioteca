@@ -13,6 +13,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.biblioteca.biblioteca.domain.Emprestimo;
+import com.biblioteca.biblioteca.domain.Livros;
+import com.biblioteca.biblioteca.domain.Usuario;
 import com.biblioteca.biblioteca.repository.EmprestimoRepository;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -38,9 +40,13 @@ public class MailService {
         List<Emprestimo> emprestimos = this.buscarUsuariosComDevolucaoAtrasada();
 
         for (Emprestimo emprestimo: emprestimos){
-            this.senderMail(emprestimo.getUsuario().getNome(), emprestimo.getUsuario().getEmail(),
-             "DIA DA DEVOLUÇÃO", "Prezado, o dia da devolução do livro chegou, por favor nos entregue o livro: " + emprestimo.getLivro().getTitulo() + "que estar pendente.");
-             LOGGER.info("Email de cobrança enviado ao email: " + emprestimo.getUsuario().getEmail());
+
+            Usuario user = emprestimo.getUsuario();
+            Livros livro = emprestimo.getLivro();
+
+            this.senderMail(user.getNome(), user.getEmail(),
+             "DIA DA DEVOLUÇÃO", "Prezado, o dia da devolução do livro chegou, por favor nos entregue o livro: " + livro.getTitulo() + "que estar pendente.");
+             LOGGER.info("Email de cobrança enviado ao email: " + user.getEmail());
         }
     }
 

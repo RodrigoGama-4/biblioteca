@@ -51,11 +51,14 @@ public class EmprestimoService {
     @Transactional
     public Emprestimo saveLoan(Emprestimo emprestimo) throws RuntimeException{
 
-        if (this.userHasBook(emprestimo.getLivro().getIsbn(), emprestimo.getUsuario().getUserId())){
+        Usuario user = emprestimo.getUsuario();
+        Livros livros = emprestimo.getLivro();
+
+        if (this.userHasBook(livros.getIsbn(), user.getUserId())){
             throw new UsuarioPossuiLivroExcepction("Usuário já possui esse Livro");
         }
 
-        Optional<Livros> livroOptional = this.livrosService.findbyId(emprestimo.getLivro().getIsbn());
+        Optional<Livros> livroOptional = this.livrosService.findbyId(livros.getIsbn());
         
         if (livroOptional.isPresent()){
             Livros livro = livroOptional.get();
@@ -65,10 +68,10 @@ public class EmprestimoService {
                 Emprestimo emprestimoSalvo = this.emprestimoRepository.save(emprestimo);
 
                 // Enviar o e-mail de forma assíncrona
-                CompletableFuture.runAsync(() -> this.mailService.senderMail(emprestimo.getUsuario().getNome(), 
-                                                                            emprestimo.getUsuario().getEmail(),
+                CompletableFuture.runAsync(() -> this.mailService.senderMail(user.getNome(), 
+                                                                            user.getEmail(),
                                                                 "Aluguel de livros", 
-                                                                            "Parabéns, você alugou o livro: "+ emprestimo.getLivro().getTitulo()));
+                                                                            "Parabéns, você alugou o livro: "+ livros.getTitulo()));
                 
                 return emprestimoSalvo;
             }
@@ -77,7 +80,7 @@ public class EmprestimoService {
             }
         }
         else{
-            throw new LivroNaoEncontradoException(emprestimo.getLivro().getIsbn());
+            throw new LivroNaoEncontradoException(livros.getIsbn());
         }
     }
 
