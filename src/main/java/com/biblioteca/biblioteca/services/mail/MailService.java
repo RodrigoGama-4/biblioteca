@@ -32,14 +32,15 @@ public class MailService {
 
 
 
-    @Scheduled(cron = "0 0 12 * * ?")
+    @Scheduled(cron = "0 36 12 * * ?")
     public void senderMailBilling(){
+        LOGGER.info("executou senderMailBilling!!!!");
         List<Emprestimo> emprestimos = this.buscarUsuariosComDevolucaoAtrasada();
 
         for (Emprestimo emprestimo: emprestimos){
             this.senderMail(emprestimo.getUsuario().getNome(), emprestimo.getUsuario().getEmail(),
              "DIA DA DEVOLUÇÃO", "Prezado, o dia da devolução do livro chegou, por favor nos entregue o livro: " + emprestimo.getLivro().getTitulo() + "que estar pendente.");
-             LOGGER.info("Email ao email: " + emprestimo.getUsuario().getEmail() + " enviado com sucesso.d");
+             LOGGER.info("Email de cobrança enviado ao email: " + emprestimo.getUsuario().getEmail());
         }
     }
 
