@@ -15,7 +15,7 @@ import com.biblioteca.biblioteca.dtos.AuthenticationDTO;
 import com.biblioteca.biblioteca.dtos.LoginResponseDTO;
 import com.biblioteca.biblioteca.dtos.UsuarioDTO;
 import com.biblioteca.biblioteca.infra.security.TokenService;
-import com.biblioteca.biblioteca.services.CpfAPIService;
+import com.biblioteca.biblioteca.services.CpfService;
 import com.biblioteca.biblioteca.services.UsuarioService;
 
 import jakarta.validation.Valid;
@@ -34,19 +34,19 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @Autowired
-    private CpfAPIService cpfAPIService;
+    private CpfService cpfService;
 
     @PostMapping("/register")
     public ResponseEntity<Usuario> register(@RequestBody @Valid UsuarioDTO data){
         if(this.usuarioService.findbyEmail(data.email()) != null) return ResponseEntity.badRequest().build();
 
-        if (!this.cpfAPIService.searchCPF(data.cpf()).valid()){
+        
+        //Verificar se o cpf é valido ou nao
+        if (!this.cpfService.searchCpf(data.cpf()).valid()){
             return ResponseEntity.badRequest().build();
         }
-        
+
         String senhaEncript = new BCryptPasswordEncoder().encode(data.senha());
-        
-        //JOGAR PRO SERVICE VERIFICAR O CPF AQ
 
         Usuario user = new Usuario(data.cpf(),data.nome(), senhaEncript, data.email(), data.telefone());
         this.usuarioService.saveUser(user);
