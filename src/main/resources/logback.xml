@@ -2,28 +2,33 @@
 <configuration>
     <property name="LOG_DIR_SPLUNK" value="logs/splunk"/>
 
-    <!--    Log console-->
+    <!-- Log console -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>{ "timestamp": %d{dd-MM-yyyy HH:mm:ss.SSS}, "message": %msg, "logger_name": %logger{35}, "thread_name": [%thread], "level": %-5level }%n</pattern>
         </encoder>
     </appender>
 
+    <!-- Log console para o logger com.biblioteca -->
+    <appender name="STDOUT_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>{ "timestamp": %d{dd-MM-yyyy HH:mm:ss.SSS}, "message": %msg, "logger_name": %logger{35}, "thread_name": [%thread], "level": %-5level }%n</pattern>
+        </encoder>
+    </appender>
 
-    <!--    Exemplo 1 - saida log é anexado somente em um arquivo -->
+    <!-- Exemplo 1 - saída de log anexada somente em um arquivo -->
     <appender name="splunk" class="ch.qos.logback.core.FileAppender">
         <file>${LOG_DIR_SPLUNK:-env/}/splunk.txt</file>
         <append>true</append>
         <encoder>
             <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} | %-4relative | [%thread] | %-5level | %logger{35} - %msg%n</pattern>
-<!--            <pattern>{"service": ""}</pattern>-->
         </encoder>
     </appender>
 
-
-    <logger name="com.biblioteca" level="info" >
-        <appender-ref ref="STDOUT"/>
+    <logger name="com.biblioteca" level="info">
+        <appender-ref ref="STDOUT_CONSOLE"/>
     </logger>
+
     <root level="info">
         <appender-ref ref="splunk"/>
     </root>
